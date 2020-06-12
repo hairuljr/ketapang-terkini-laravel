@@ -1,0 +1,62 @@
+@extends('layouts.admin')
+
+@section('content')
+    <!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Edit Info</h1>
+  </div>
+
+  @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+  @endif
+
+
+  <div class="row">
+    <div class="card-body col-md-6">
+      <form action="{{ route('info-kite.update', $item->id) }}" method="post" enctype="multipart/form-data">
+      @method('PUT')
+        @csrf
+      <div class="form-group">
+        <label for="nama_kat_info">Nama Kategori Info</label>
+        <input type="text" class="form-control" name="nama_kat_info" placeholder="Nama Kategori Info" value="{{ $item->nama_kat_info }}">
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4">Gambar Info</div>
+        <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-4 mb-4">
+                <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail">
+            </div>
+                <div class="col-sm-8">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="gambar" name="gambar" required>
+                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-center mt-4">
+      <div class="col-sm-3">
+        <a href="{{ url('admin/info-kite') }}" class="btn btn-secondary">Kembali</a>
+      </div>
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+@endsection

@@ -1,0 +1,23 @@
+.portfolio-filter {
+  list-style: none;
+  padding-bottom: 100px;
+}
+
+.portfolio-filter li {
+  font-size: 16px;
+  display: inline-block;
+  margin-right: 30px;
+  padding-bottom: 10px;
+  color: #979797;
+  cursor: pointer;
+}
+
+.portfolio-filter li.mixitup-control-active {
+  color: #001418;
+}
+
+@media only screen and (max-width: 767px) {
+  .portfolio-filter {
+    text-align: center;
+  }
+}
