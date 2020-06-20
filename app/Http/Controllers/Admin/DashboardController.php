@@ -23,15 +23,7 @@ class DashboardController extends Controller
         $jml_eventLoker = EventLoker::withoutTrashed()->count();
         $jml_merchant = User::where('roles', 'MERCHANT')->count();
         $jml_info = Info::withoutTrashed()->count();
-        $fashion = Info::where('id_kat_info', 1)->withoutTrashed()->count();
-        $kuliner = Info::where('id_kat_info', 2)->withoutTrashed()->count();
-        $wisata = Info::where('id_kat_info', 3)->withoutTrashed()->count();
-        $jasa = Info::where('id_kat_info', 1)->withoutTrashed()->count();
         return view('pages.admin.dashboard', [
-            'jml_fashion' => $fashion,
-            'jml_kuliner' => $kuliner,
-            'jml_wisata' => $wisata,
-            'jml_jasa' => $jasa,
             'jml_berita' => $berita,
             'jml_eventLoker' => $jml_eventLoker,
             'jml_merchant' => $jml_merchant,

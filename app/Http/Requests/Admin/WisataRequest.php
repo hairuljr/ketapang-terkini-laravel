@@ -25,7 +25,9 @@ class WisataRequest extends FormRequest
     {
         return [
             'judul' => 'required|max:255',
+            'id_users' => 'exists:users,id',
             'id_kat_info' => 'exists:kategori_infos,id',
+            'links' => 'required',
             'rating' => 'required|max:255',
             'jml_rating' => 'required|max:255',
             'keterangan' => 'required',

@@ -12,7 +12,7 @@ class Wisata extends Model
     protected $table = 'infos';
 
     protected $fillable = [
-        'judul', 'id_kat_info', 'rating', 'jml_rating', 'keterangan', 'gambar'
+        'judul', 'slug', 'id_users', 'id_kat_info', 'links', 'rating', 'jml_rating', 'keterangan', 'gambar'
     ];
 
     protected $hidden = [];

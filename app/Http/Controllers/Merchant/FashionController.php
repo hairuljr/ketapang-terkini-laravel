@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Merchant;
 
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FashionRequest;
 use App\Fashion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class FashionController extends Controller
@@ -17,8 +19,12 @@ class FashionController extends Controller
      */
     public function index()
     {
-        //$items = Fashion::all();
-        $items = Fashion::with(['kategori_fashion'])->where('id_kat_info', 1)->get();
+        $id = FacadesAuth::user()->id;
+        $items = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '1'],
+            ['deleted_at', '=', null],
+        ])->get();
         return \view('pages.merchant.info.fashion', [
             'items' => $items
         ]);
@@ -43,6 +49,7 @@ class FashionController extends Controller
     public function store(FashionRequest $request)
     {
         $data = $request->all();
+        $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
             'assets/info-fashion',
@@ -87,6 +94,7 @@ class FashionController extends Controller
     public function update(FashionRequest $request, $id)
     {
         $data = $request->all();
+        $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Fashion::findOrFail($id);
         $data['gambar'] = $request->file('gambar')->store(

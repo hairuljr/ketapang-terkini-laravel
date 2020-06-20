@@ -8,15 +8,34 @@ use App\Fashion;
 use App\Kuliner;
 use App\Wisata;
 use App\Jasa;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $fashion = Fashion::where('id_kat_info', 1)->count();
-        $kuliner = Kuliner::where('id_kat_info', 2)->count();
-        $wisata = Wisata::where('id_kat_info', 3)->count();
-        $jasa = Jasa::where('id_kat_info', 4)->count();
+        $id = FacadesAuth::user()->id;
+        $fashion = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '1'],
+            ['deleted_at', '=', null],
+        ])->count();
+        $kuliner = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '2'],
+            ['deleted_at', '=', null],
+        ])->count();
+        $wisata = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '3'],
+            ['deleted_at', '=', null],
+        ])->count();
+        $jasa = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '4'],
+            ['deleted_at', '=', null],
+        ])->count();
         return view('pages.merchant.dashboard', [
             'jml_fashion' => $fashion,
             'jml_kuliner' => $kuliner,

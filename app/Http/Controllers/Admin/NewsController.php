@@ -63,7 +63,7 @@ class NewsController extends Controller
 
         $berita->save();
 
-        $berita->categories()->attach($request->category_id);
+        $berita->categories()->sync($request->category_id);
         $berita->tags()->attach($request->tag_id);
 
         return redirect('admin/kelola-berita')->with('toast_success', 'Berita Berhasil Ditambahkan!');
@@ -103,14 +103,28 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, $id)
     {
-        $data = $request->all();
-        //$data['slug'] = Str::slug($request->judul);
-        $item =  News::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/berita',
-            'public'
-        );
-        $item->update($data);
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $gambarnya = $request->gambar->storeAs('assets/berita', $filename, 'public');
+        } else {
+            $$gambarnya = 'default.jpg';
+        }
+
+        News::where('id', $id)->update([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'penggalan' => $request->penggalan,
+            'tanggal' => $request->tanggal,
+            'slug' => Str::slug($request->judul),
+            'gambar' => $gambarnya,
+            'konten' => $request->konten,
+        ]);
+        DB::table('category_news')->where('news_id', $id)->delete();
+        DB::table('news_tag')->where('news_id', $id)->delete();
+        $news = new News();
+        $news->categories()->attach($request->category_id, ['news_id' => $id]);
+        $news->tags()->attach($request->tag_id, ['news_id' => $id]);
+
         return redirect('admin/kelola-berita')->with('toast_success', 'Berita Berhasil Diubah!');
     }
 

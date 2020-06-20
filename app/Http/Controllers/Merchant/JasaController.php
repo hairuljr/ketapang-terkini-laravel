@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Merchant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JasaRequest;
 use App\Jasa;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,8 +19,12 @@ class JasaController extends Controller
      */
     public function index()
     {
-        //$items = Jasa::all();
-        $items = Jasa::with(['kategori_jasa'])->where('id_kat_info', 4)->get();
+        $id = FacadesAuth::user()->id;
+        $items = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '4'],
+            ['deleted_at', '=', null],
+        ])->get();
         return \view('pages.merchant.info.jasa', [
             'items' => $items
         ]);
@@ -43,7 +49,8 @@ class JasaController extends Controller
     public function store(JasaRequest $request)
     {
         $data = $request->all();
-        //$data['slug'] = Str::slug($request->judul);
+        $data['id_users'] = FacadesAuth::user()->id;
+        $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
             'assets/info-jasa',
             'public'
@@ -87,7 +94,8 @@ class JasaController extends Controller
     public function update(JasaRequest $request, $id)
     {
         $data = $request->all();
-        //$data['slug'] = Str::slug($request->judul);
+        $data['id_users'] = FacadesAuth::user()->id;
+        $data['slug'] = Str::slug($request->judul);
         $item = Jasa::findOrFail($id);
         $data['gambar'] = $request->file('gambar')->store(
             'assets/info-jasa',

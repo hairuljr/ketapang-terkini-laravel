@@ -40,7 +40,7 @@
       <div class="col text-center">
         <div class="block-27">
           <ul>
-            <li class="mx-1">{{ $news->links() }}</li>
+            <li class="mx-1">{{ $items->links() }}</li>
           </ul>
         </div>
       </div>

@@ -11,7 +11,7 @@
   @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
-          @foreach ($errors as $error)
+          @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
           @endforeach
         </ul>
@@ -26,6 +26,11 @@
       <div class="form-group">
         <label for="judul">Judul</label>
         <input type="text" class="form-control" name="judul" placeholder="Judul Info Fashion" value="{{ old('judul') }}">
+      </div>
+      <div class="form-group">
+        <label for="links">Link Embed Google Maps</label>
+        <p><i><b>*</b>Link didapat dengan fitur sematkan Peta dari Google Maps<br> Silahkan cari tutornya di Google yaa kalau belum tau.</i></p>
+        <input type="text" class="form-control" name="links" placeholder="Sematkan peta dalam ukuran Kecil" value="{{ old('links') }}">
       </div>
       <div class="form-group">
         <label for="rating">Rating</label>

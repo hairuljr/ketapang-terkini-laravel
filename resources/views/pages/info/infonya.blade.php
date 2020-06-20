@@ -22,16 +22,16 @@
           <p class="text-left mr-2">
             <a href="#" class="mr-2">{{ $items->rating }}.0</a>
             <?php
-            for ($x = 1; $x <= 4; $x++) {
+            for ($x = 1; $x <= $items->rating; $x++) {
               echo '<a class="mr-1" href="#"><span class="ion-ios-star"></span></a>';
             }
-            for ($x = 1; $x <= 5 - 4; $x++) {
+            for ($x = 1; $x <= 5 - $items->rating; $x++) {
               echo '<a class="mr-1" href="#"><span class="ion-ios-star-outline"></span></a>';
             }
             ?>
           </p>
           <p class="text-left mr-4">
-            <a href="#" class="mr-2" style="color: #000;">{{ $items->jml_rating }}> <span style="color: #bbb;">Rating</span></a>
+            <a href="#" class="mr-2" style="color: #000;">{{ $items->jml_rating }}<span style="color: #bbb;"> Rating</span></a>
           </p>
         </div>
         <p>
@@ -40,7 +40,7 @@
         <p>
           <a href="{{ url('info')}}" class="btn btn-primary py-2 px-3">Kembali</a>
         </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d811.3015222689248!2d109.98536478746828!3d-1.8630586758644008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e0518246fcc8edf%3A0x452050502a61bd02!2sKeraton%20Kerajaan%20Matan%20Tanjungpura!5e1!3m2!1sid!2ssg!4v1589607923328!5m2!1sid!2ssg" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        {!! $items->links !!}
       </div>
     </div>
   </div>

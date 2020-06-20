@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Merchant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KulinerRequest;
 use App\Kuliner;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,8 +19,12 @@ class KulinerController extends Controller
      */
     public function index()
     {
-        //$items = Kuliner::all();
-        $items = Kuliner::with(['kategori_kuliner'])->where('id_kat_info', 2)->get();
+        $id = FacadesAuth::user()->id;
+        $items = DB::table('infos')->where([
+            ['id_users', '=', $id],
+            ['id_kat_info', '=', '2'],
+            ['deleted_at', '=', null],
+        ])->get();
         return \view('pages.merchant.info.kuliner', [
             'items' => $items
         ]);
@@ -43,7 +49,8 @@ class KulinerController extends Controller
     public function store(KulinerRequest $request)
     {
         $data = $request->all();
-        //$data['slug'] = Str::slug($request->judul);
+        $data['id_users'] = FacadesAuth::user()->id;
+        $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
             'assets/info-kuliner',
             'public'
@@ -87,7 +94,8 @@ class KulinerController extends Controller
     public function update(KulinerRequest $request, $id)
     {
         $data = $request->all();
-        //$data['slug'] = Str::slug($request->judul);
+        $data['id_users'] = FacadesAuth::user()->id;
+        $data['slug'] = Str::slug($request->judul);
         $item = Kuliner::findOrFail($id);
         $data['gambar'] = $request->file('gambar')->store(
             'assets/info-kuliner',
