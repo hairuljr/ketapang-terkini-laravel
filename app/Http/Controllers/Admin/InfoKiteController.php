@@ -81,10 +81,12 @@ class InfoKiteController extends Controller
     {
         $data = $request->all();
         $item = InfoKite::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/home/info-kite',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/info-kite', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('admin/info-kite')->with('toast_success', 'Info Berhasil Diubahtoast_!');
     }

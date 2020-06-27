@@ -26,7 +26,7 @@ class BannerRequest extends FormRequest
         return [
             'judul' => 'required|max:255',
             'sub_judul' => 'required|max:255',
-            'gambar' => 'required|image'
+            //'gambar' => 'required|image'
         ];
     }
 }

@@ -30,8 +30,7 @@ class KulinerRequest extends FormRequest
             'links' => 'required',
             'rating' => 'required|max:255',
             'jml_rating' => 'required|max:255',
-            'keterangan' => 'required',
-            'gambar' => 'required|image'
+            'keterangan' => 'required'
         ];
     }
 }

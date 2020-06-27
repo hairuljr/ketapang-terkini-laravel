@@ -43,7 +43,11 @@
           @endguest
 
           @auth
-          @if (Auth::user()->roles === "MERCHANT")
+          @if (Auth::user()->roles === "ADMIN")
+            <li class="nav-item">
+              <a href="{{ url('admin') }}" class="nav-link mt-3 mb-3 my-2 py-2">Dashboard</a>
+            </li>
+          @else
             <li class="nav-item">
               <a href="{{ url('merchant') }}" class="nav-link mt-3 mb-3 my-2 py-2">Dashboard</a>
             </li>

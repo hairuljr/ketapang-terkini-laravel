@@ -48,6 +48,9 @@ class JasaController extends Controller
      */
     public function store(JasaRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
@@ -97,10 +100,12 @@ class JasaController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Jasa::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-jasa',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/info-jasa', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('admin/info-jasa')->with('toast_success', 'Jasa Berhasil Diubah!');
     }

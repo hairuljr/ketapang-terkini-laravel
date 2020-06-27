@@ -103,11 +103,13 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, $id)
     {
+        $item = News::findOrFail($id);
+        $pic = $item->gambar;
         if ($request->hasFile('gambar')) {
             $filename = $request->gambar->getClientOriginalName();
             $gambarnya = $request->gambar->storeAs('assets/berita', $filename, 'public');
         } else {
-            $$gambarnya = 'default.jpg';
+            $gambarnya = $pic;
         }
 
         News::where('id', $id)->update([

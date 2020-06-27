@@ -19,7 +19,7 @@
   @endif
 
   <div class="row">
-    <div class="card-body col-md-6">
+    <div class="card-body col-md-12">
       <form action="{{ route('kelola-berita.update', $item->id) }}" method="post" enctype="multipart/form-data">
       @method('PUT')
         @csrf
@@ -68,7 +68,7 @@
               </div>
                   <div class="col-sm-8">
                       <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="gambar" name="gambar">
+                          <input value="{{ $item->gambar }}" type="file" class="custom-file-input" id="gambar" name="gambar">
                           <label class="custom-file-label" for="gambar">Pilih gambar</label>
                       </div>
                   </div>
@@ -76,7 +76,7 @@
           </div>
       </div>
         <div class="form-group">
-          <textarea id="konten" class="form-control" name="konten" rows="10" cols="50"></textarea>
+          <textarea id="konten" class="form-control" name="konten" rows="10" cols="50">{!! $item->konten !!}</textarea>
         </div>
 
     <div class="row align-items-center justify-content-center mt-4">
@@ -93,4 +93,9 @@
 
 </div>
 <!-- /.container-fluid -->
+<script src="{{ url('backend/js/ckeditor/ckeditor.js') }}"></script>
+
+<script>
+  CKEDITOR.replace('konten');
+</script>
 @endsection

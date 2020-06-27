@@ -12,9 +12,9 @@ class News extends Model
 {
     use SoftDeletes;
 
-    // protected $fillable = [
-    //     'judul', 'slug', 'penggalan', 'penulis', 'tanggal', 'gambar', 'konten'
-    // ];
+    protected $fillable = [
+        'judul', 'slug', 'penggalan', 'penulis', 'tanggal', 'gambar', 'konten'
+    ];
 
     protected $guarded = [];
 

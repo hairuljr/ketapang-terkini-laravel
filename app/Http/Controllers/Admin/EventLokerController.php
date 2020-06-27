@@ -43,6 +43,9 @@ class EventLokerController extends Controller
      */
     public function store(EventLokerRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
@@ -89,10 +92,12 @@ class EventLokerController extends Controller
     {
         $data = $request->all();
         $item = EventLoker::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/event-loker',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/event-loker', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('admin/event-loker')->with('toast_success', 'Event / Loker Berhasil Diubah!');
     }

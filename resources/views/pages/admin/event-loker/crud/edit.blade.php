@@ -38,7 +38,7 @@
             </div>
                 <div class="col-sm-8">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="gambar" name="gambar" required>
+                        <input value="{{ $item->gambar }}" type="file" class="custom-file-input" id="gambar" name="gambar">
                         <label class="custom-file-label" for="gambar">Pilih gambar</label>
                     </div>
                 </div>

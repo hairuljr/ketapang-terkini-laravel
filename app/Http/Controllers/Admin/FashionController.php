@@ -48,6 +48,9 @@ class FashionController extends Controller
      */
     public function store(FashionRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
@@ -97,11 +100,12 @@ class FashionController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Fashion::findOrFail($id);
-        
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-fashion',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/info-fashion', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('admin/info-fashion')->with('toast_success', 'Fashion Berhasil Diubah!');
     }

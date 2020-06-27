@@ -38,6 +38,9 @@ class BannerController extends Controller
      */
     public function store(BannerRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
@@ -85,10 +88,12 @@ class BannerController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($request->judul);
         $item = Banner::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/home',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/home', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('admin/banner')->with('toast_success', 'Banner Berhasil Diubah!');
     }

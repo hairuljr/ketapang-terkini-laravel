@@ -25,7 +25,7 @@ class InfoKiteRequest extends FormRequest
     {
         return [
             'nama_kat_info' => 'required|max:255',
-            'gambar' => 'required|image'
+            //'gambar' => 'required|image'
         ];
     }
 }
