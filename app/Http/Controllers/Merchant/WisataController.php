@@ -47,6 +47,9 @@ class WisataController extends Controller
      */
     public function store(WisataRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
@@ -96,10 +99,12 @@ class WisataController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Wisata::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-wisata',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/info-wisata', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('merchant/wisata')->with('success', 'Wisata Berhasil Diubah!');
     }

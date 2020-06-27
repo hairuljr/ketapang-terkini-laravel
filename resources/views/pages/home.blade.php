@@ -123,10 +123,11 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p>
-			</div>
-		</div>
+				{{-- </div> --}}
+				{{-- <p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p> --}}
+			{{-- </div> --}}
+					</div>
+					<p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p>
 				@empty
 					<div class="item">
 						<div class="testimony-wrap p-4 pb-5">
@@ -137,10 +138,11 @@
 					</div>
 				</div>
 				<p class="text text-center"><a href="#" class="btn btn-primary">Galeri Kosong</a></p>
-			</div>
+				@endforelse
+			{{-- </div> --}}
 		</div>
-		@endforelse
 	</div>
+		
 </section>
 <!-- End Galeri Update -->
 @endsection

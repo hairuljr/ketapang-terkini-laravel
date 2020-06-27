@@ -38,7 +38,11 @@
           @guest
           <form>
             @csrf
-            <button class="buttonku btn btn-outline-success mt-3 mb-3 my-2 py-2" type="button" onclick="event.preventDefault(); location.href='{{url('login')}}';">Login</button>
+            @if (request()->segment(1) == 'login')
+              <button class="buttonku btn btn-outline-success mt-3 mb-3 my-2 py-2" type="button" onclick="event.preventDefault(); location.href='{{url('register')}}';">Daftar</button>
+            @else
+              <button class="buttonku btn btn-outline-success mt-3 mb-3 my-2 py-2" type="button" onclick="event.preventDefault(); location.href='{{url('login')}}';">Login</button>
+            @endif
           </form>
           @endguest
 

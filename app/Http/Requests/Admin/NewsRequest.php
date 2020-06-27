@@ -29,7 +29,6 @@ class NewsRequest extends FormRequest
             'penulis' => 'required|max:255',
             'tanggal' => 'required',
             'konten' => 'required',
-            //'gambar' => 'required|image'
         ];
     }
 }

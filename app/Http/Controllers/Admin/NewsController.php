@@ -44,6 +44,9 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         if ($request->hasFile('gambar')) {
             $filename = $request->gambar->getClientOriginalName();
             $gambarnya = $request->gambar->storeAs('assets/berita', $filename, 'public');

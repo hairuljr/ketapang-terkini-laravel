@@ -48,6 +48,9 @@ class KulinerController extends Controller
      */
     public function store(KulinerRequest $request)
     {
+        $data = $request->validate([
+            'gambar' => 'required|image'
+        ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
@@ -97,10 +100,12 @@ class KulinerController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Kuliner::findOrFail($id);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-kuliner',
-            'public'
-        );
+        if ($request->hasFile('gambar')) {
+            $filename = $request->gambar->getClientOriginalName();
+            $data['gambar'] = $request->gambar->storeAs('assets/info-kuliner', $filename, 'public');
+        } else {
+            $data['gambar'] = $item->gambar;
+        }
         $item->update($data);
         return redirect('merchant/kuliner')->with('success', 'Kuliner Berhasil Diubah!');
     }
