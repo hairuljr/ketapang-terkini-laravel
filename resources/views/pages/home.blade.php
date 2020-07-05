@@ -45,7 +45,7 @@
 	</div>
 </section>
 
-<!-- Info -->
+<!-- Info Kite-->
 <section class="ftco-section ftco-category ftco-no-pt">
 	<div class="container">
 		<div class="row">
@@ -64,14 +64,14 @@
 						@foreach ($fashion as $item)
 						<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{ Storage::url($item->gambar) }}');">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="#">{{ $item->nama_kat_info }}</a></h2>
+								<h2 class="mb-0"><a href="{{ route('fashion') }}">{{ $item->nama_kat_info }}</a></h2>
 							</div>
 						</div>
 						@endforeach
 						@foreach ($kuliner as $item)
 						<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('{{ Storage::url($item->gambar) }}');">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="#">{{ $item->nama_kat_info }}</a></h2>
+								<h2 class="mb-0"><a href="{{ route('kuliner') }}">{{ $item->nama_kat_info }}</a></h2>
 							</div>
 						</div>
 						@endforeach
@@ -82,14 +82,14 @@
 				@foreach ($wisata as $item)
 				<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{ Storage::url($item->gambar) }}');">
 					<div class="text px-3 py-1">
-						<h2 class="mb-0"><a href="#">{{ $item->nama_kat_info }}</a></h2>
+						<h2 class="mb-0"><a href="{{ route('wisata') }}">{{ $item->nama_kat_info }}</a></h2>
 					</div>
 				</div>
 				@endforeach
 				@foreach ($jasa as $item)
 				<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('{{ Storage::url($item->gambar) }}');">
 					<div class="text px-3 py-1">
-						<h2 class="mb-0"><a href="#">{{ $item->nama_kat_info }}</a></h2>
+						<h2 class="mb-0"><a href="{{ route('jasa') }}">{{ $item->nama_kat_info }}</a></h2>
 					</div>
 				</div>
 				@endforeach
@@ -115,7 +115,7 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div class="carousel-testimony owl-carousel">
-				@forelse ($eventloker->take(5) as $item)
+				@foreach ($eventloker->take(5) as $item)
 					<div class="item">
 						<div class="testimony-wrap p-4 pb-5">
 							<div class="product">
@@ -123,24 +123,10 @@
 							</div>
 						</div>
 					</div>
-				{{-- </div> --}}
-				{{-- <p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p> --}}
-			{{-- </div> --}}
-					</div>
-					<p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p>
-				@empty
-					<div class="item">
-						<div class="testimony-wrap p-4 pb-5">
-							<div class="product">
-								<img style="height: 300px;" width="300px" class="img-fluid" src="{{ url('frontend/images/default-thumbnail.jpg') }}" />
-							</div>
-						</div>
-					</div>
+					@endforeach
 				</div>
-				<p class="text text-center"><a href="#" class="btn btn-primary">Galeri Kosong</a></p>
-				@endforelse
-			{{-- </div> --}}
-		</div>
+			</div>
+				<p class="text text-center"><a href="{{ route('event-loker') }}" class="btn btn-primary">Selengkapnya</a></p>
 	</div>
 		
 </section>

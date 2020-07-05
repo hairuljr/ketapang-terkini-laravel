@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     public function index(Request $request)
     {
         $id = FacadesAuth::user()->id;
