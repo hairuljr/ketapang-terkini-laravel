@@ -21,6 +21,31 @@
     <div class="row">
       <div class="col-lg-8 ftco-animate">
         <div class="row">
+          @php
+              function tgl_indo($tanggal){
+              $bulan = array (
+                1 =>   'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
+              );
+              $pecahkan = explode('-', $tanggal);
+              
+              // variabel pecahkan 0 = tanggal
+              // variabel pecahkan 1 = bulan
+              // variabel pecahkan 2 = tahun
+            
+              return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+            }
+          @endphp
           @foreach ($news as $item)
             <div class="col-md-12 d-flex ftco-animate">
               <div class="blog-entry align-self-stretch d-md-flex">
@@ -28,7 +53,7 @@
                 </a>
                 <div class="text d-block pl-md-4">
                   <div class="meta mb-3">
-                    <div><a>{{ $item->tanggal }}</a></div>
+                    <div><a>{{ tgl_indo($item->tanggal) }}</a></div>
                     <div><a>{{ $item->penulis }}</a></div>
                   </div>
                   <h3 class="heading">
@@ -67,7 +92,7 @@
 
         <!-- Kolom Category -->
         <div class="sidebar-box ftco-animate">
-          <h3 class="heading">Kategori</h3>
+          <h3 class="heading">Kategori Populer</h3>
           <ul class="categories">
             @foreach ($jml_category as $item)
               <li>
@@ -79,10 +104,10 @@
           </ul>
         </div>
 
-        <!-- Berita Sebelumnya -->
+        <!-- Berita Populer -->
         <div class="sidebar-box ftco-animate">
-          <h3 class="heading">Berita Sebelumnya</h3>
-          @foreach ($recentnews as $item)
+          <h3 class="heading">Berita Populer</h3>
+          @foreach ($newsPopuler as $item)
             <div class="block-21 mb-4 d-flex">
               <a href="{{ route('berita-detail', $item->slug) }}" class="blog-img mr-4" style="background-image: url('{{ Storage::url($item->gambar) }}');"></a>
               <div class="text">
@@ -91,7 +116,7 @@
                 </h3>
                 <div class="meta">
                   <div>
-                    <a><span class="icon-calendar"></span> {{ $item->tanggal }}</a>
+                    <a><span class="icon-calendar"></span> {{ tgl_indo($item->tanggal) }}</a>
                   </div>
                   <div>
                     <a><span class="icon-person"></span> {{ $item->penulis }}</a>

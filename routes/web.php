@@ -46,9 +46,9 @@ Route::prefix('admin')
         Route::resource('tagar-berita', 'TagsController');
     });
 
-Route::prefix('merchant')
-    ->namespace('Merchant')
-    ->middleware(['auth', 'verified', 'merchant'])
+Route::prefix('mitra')
+    ->namespace('Mitra')
+    ->middleware(['auth', 'verified', 'mitra'])
     ->group(function () {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('fashion', 'FashionController');

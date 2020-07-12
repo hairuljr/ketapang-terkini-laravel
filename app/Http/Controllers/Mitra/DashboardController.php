@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Merchant;
+namespace App\Http\Controllers\Mitra;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class DashboardController extends Controller
             ['id_kat_info', '=', '4'],
             ['deleted_at', '=', null],
         ])->count();
-        return view('pages.merchant.dashboard', [
+        return view('pages.mitra.dashboard', [
             'jml_fashion' => $fashion,
             'jml_kuliner' => $kuliner,
             'jml_wisata' => $wisata,

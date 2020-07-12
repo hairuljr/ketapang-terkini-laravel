@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Merchant;
+namespace App\Http\Controllers\Mitra;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KulinerRequest;
@@ -25,7 +25,7 @@ class KulinerController extends Controller
             ['id_kat_info', '=', '2'],
             ['deleted_at', '=', null],
         ])->get();
-        return \view('pages.merchant.info.kuliner', [
+        return \view('pages.mitra.info.kuliner', [
             'items' => $items
         ]);
     }
@@ -37,7 +37,7 @@ class KulinerController extends Controller
      */
     public function create()
     {
-        return \view('pages.merchant.info.crud-kuliner.create');
+        return \view('pages.mitra.info.crud-kuliner.create');
     }
 
     /**
@@ -59,7 +59,7 @@ class KulinerController extends Controller
             'public'
         );
         Kuliner::create($data);
-        return redirect('merchant/kuliner')->with('success', 'Kuliner Berhasil Ditambahkan!');
+        return redirect('mitra/kuliner')->with('success', 'Kuliner Berhasil Ditambahkan!');
     }
 
     /**
@@ -82,7 +82,7 @@ class KulinerController extends Controller
     public function edit($id)
     {
         $item = Kuliner::findOrFail($id);
-        return \view('pages.merchant.info.crud-kuliner.edit', [
+        return \view('pages.mitra.info.crud-kuliner.edit', [
             'item' => $item
         ]);
     }
@@ -107,7 +107,7 @@ class KulinerController extends Controller
             $data['gambar'] = $item->gambar;
         }
         $item->update($data);
-        return redirect('merchant/kuliner')->with('success', 'Kuliner Berhasil Diubah!');
+        return redirect('mitra/kuliner')->with('success', 'Kuliner Berhasil Diubah!');
     }
 
     /**
@@ -121,6 +121,6 @@ class KulinerController extends Controller
         $item = Kuliner::findOrFail($id);
         $item->delete();
 
-        return redirect('merchant/kuliner')->with('success', 'Kuliner Berhasil Dihapus!');
+        return redirect('mitra/kuliner')->with('success', 'Kuliner Berhasil Dihapus!');
     }
 }

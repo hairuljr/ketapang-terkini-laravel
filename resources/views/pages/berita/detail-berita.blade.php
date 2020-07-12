@@ -54,7 +54,7 @@
         <!-- Berita Sebelumnya -->
         <div class="sidebar-box ftco-animate">
           <h3 class="heading">Berita Sebelumnya</h3>
-          @foreach ($recentnews as $item)
+          @foreach ($newsPopuler as $item)
           <div class="block-21 mb-4 d-flex">
             <a href="{{ route('berita-detail', $item->slug) }}" class="blog-img mr-4" style="background-image: url('{{ Storage::url($item->gambar) }}');"></a>
             <div class="text">

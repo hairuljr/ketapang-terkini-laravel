@@ -20,7 +20,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    @include('includes.backend.sidebar-merchant')
+    @include('includes.backend.sidebar-mitra')
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">

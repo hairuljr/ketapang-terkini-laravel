@@ -1,4 +1,4 @@
-@extends('layouts.merchant')
+@extends('layouts.mitra')
 
 @section('content')
     <!-- Begin Page Content -->
@@ -65,7 +65,7 @@
     </div>
     <div class="row align-items-center justify-content-center mt-4">
       <div class="col-sm-3">
-        <a href="{{ url('merchant/jasa') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ url('mitra/jasa') }}" class="btn btn-secondary">Kembali</a>
       </div>
       <div class="col-sm-3">
         <button type="submit" class="btn btn-primary">Tambah</button>

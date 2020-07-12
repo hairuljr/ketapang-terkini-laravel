@@ -1,13 +1,13 @@
-@extends('layouts.merchant')
+@extends('layouts.mitra')
 
 @section('content')
     <!-- Begin Page Content -->
 <div class="container-fluid">
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Info Jasa</h1>
-    <a href="{{ route('jasa.create') }}" class="btn btn-sm btn-primary shadow-sm">
-    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Jasa
+    <h1 class="h3 mb-0 text-gray-800">Info Wisata</h1>
+    <a href="{{ route('wisata.create') }}" class="btn btn-sm btn-primary shadow-sm">
+    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Wisata
   </a>
   </div>
 
@@ -37,9 +37,9 @@
               <td>{{ $item->keterangan }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
-                <a href="{{ route('jasa.edit', $item->id) }}" class="btn btn-info">
+                <a href="{{ route('wisata.edit', $item->id) }}" class="btn btn-info">
                 <i class="fa fa-pencil-alt"></i></a>
-                <form action="{{ route('jasa.destroy', $item->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('wisata.destroy', $item->id) }}" method="POST" class="d-inline">
                 @csrf
                 @method('delete')
                 <button onclick="return confirm('Anda Yakin Hapus Data ini?')" class="btn btn-danger">

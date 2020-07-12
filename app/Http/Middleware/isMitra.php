@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class isMerchant
+class isMitra
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class isMerchant
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->roles == 'MERCHANT' || Auth::user()->email_verified_at == !null) {
+        if (Auth::user() && Auth::user()->roles === 'MITRA') {
             return $next($request);
         } else {
-            return \redirect('/');
+            return \redirect('login');
         }
     }
 }

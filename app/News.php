@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Category;
 use App\Tag;
 
-
 class News extends Model
 {
     use SoftDeletes;

@@ -14,27 +14,27 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item {{ (request()->segment(2) == '') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ url('/merchant') }}">
+        <a class="nav-link" href="{{ url('/mitra') }}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
       <li class="nav-item {{ (request()->segment(2) == 'fashion') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ url('/merchant/fashion') }}">
+        <a class="nav-link" href="{{ url('/mitra/fashion') }}">
           <i class="fas fa-fw fa-tshirt"></i>
           <span>Info Fashion</span></a>
       </li>
       <li class="nav-item {{ (request()->segment(2) == 'kuliner') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ url('/merchant/kuliner') }}">
+        <a class="nav-link" href="{{ url('/mitra/kuliner') }}">
           <i class="fas fa-fw fa-utensils"></i>
           <span>Info Kuliner</span></a>
       </li>
       <li class="nav-item {{ (request()->segment(2) == 'wisata') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ url('/merchant/wisata') }}">
+        <a class="nav-link" href="{{ url('/mitra/wisata') }}">
           <i class="fas fa-fw fa-route"></i>
           <span>Info Wisata</span></a>
       </li>
       <li class="nav-item {{ (request()->segment(2) == 'jasa') ? 'active' : ''}}">
-        <a class="nav-link" href="{{ url('/merchant/jasa') }}">
+        <a class="nav-link" href="{{ url('/mitra/jasa') }}">
           <i class="fas fa-fw fa-briefcase"></i>
           <span>Info Jasa</span></a>
       </li>

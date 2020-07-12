@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Merchant;
+namespace App\Http\Controllers\Mitra;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\JasaRequest;
-use App\Jasa;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\FashionRequest;
+use App\Fashion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class JasaController extends Controller
+class FashionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +22,10 @@ class JasaController extends Controller
         $id = FacadesAuth::user()->id;
         $items = DB::table('infos')->where([
             ['id_users', '=', $id],
-            ['id_kat_info', '=', '4'],
+            ['id_kat_info', '=', '1'],
             ['deleted_at', '=', null],
         ])->get();
-        return \view('pages.merchant.info.jasa', [
+        return \view('pages.mitra.info.fashion', [
             'items' => $items
         ]);
     }
@@ -37,7 +37,7 @@ class JasaController extends Controller
      */
     public function create()
     {
-        return \view('pages.merchant.info.crud-jasa.create');
+        return \view('pages.mitra.info.crud-fashion.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class JasaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JasaRequest $request)
+    public function store(FashionRequest $request)
     {
         $data = $request->validate([
             'gambar' => 'required|image'
@@ -55,11 +55,11 @@ class JasaController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-jasa',
+            'assets/info-fashion',
             'public'
         );
-        Jasa::create($data);
-        return redirect('merchant/jasa')->with('success', 'Jasa Berhasil Ditambahkan!');
+        Fashion::create($data);
+        return redirect('mitra/fashion')->with('success', 'Fashion Berhasil Ditambahkan!');
     }
 
     /**
@@ -81,8 +81,8 @@ class JasaController extends Controller
      */
     public function edit($id)
     {
-        $item = Jasa::findOrFail($id);
-        return \view('pages.merchant.info.crud-jasa.edit', [
+        $item = Fashion::findOrFail($id);
+        return \view('pages.mitra.info.crud-fashion.edit', [
             'item' => $item
         ]);
     }
@@ -94,20 +94,20 @@ class JasaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JasaRequest $request, $id)
+    public function update(FashionRequest $request, $id)
     {
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
-        $item = Jasa::findOrFail($id);
+        $item = Fashion::findOrFail($id);
         if ($request->hasFile('gambar')) {
             $filename = $request->gambar->getClientOriginalName();
-            $data['gambar'] = $request->gambar->storeAs('assets/info-jasa', $filename, 'public');
+            $data['gambar'] = $request->gambar->storeAs('assets/info-fashion', $filename, 'public');
         } else {
             $data['gambar'] = $item->gambar;
         }
         $item->update($data);
-        return redirect('merchant/jasa')->with('success', 'Jasa Berhasil Diubah!');
+        return redirect('mitra/fashion')->with('success', 'Fashion Berhasil Diubah!');
     }
 
     /**
@@ -118,9 +118,9 @@ class JasaController extends Controller
      */
     public function destroy($id)
     {
-        $item = Jasa::findOrFail($id);
+        $item = Fashion::findOrFail($id);
         $item->delete();
 
-        return redirect('merchant/jasa')->with('success', 'Jasa Berhasil Dihapus!');
+        return redirect('mitra/fashion')->with('success', 'Fashion Berhasil Dihapus!');
     }
 }

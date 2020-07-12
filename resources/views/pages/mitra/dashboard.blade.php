@@ -1,4 +1,4 @@
-@extends('layouts.merchant')
+@extends('layouts.mitra')
 
 @section('content')
     <!-- Begin Page Content -->

@@ -21,12 +21,12 @@ class DashboardController extends Controller
 
         $berita = News::withoutTrashed()->count();
         $jml_eventLoker = EventLoker::withoutTrashed()->count();
-        $jml_merchant = User::where('roles', 'MERCHANT')->count();
+        $jml_mitra = User::where('roles', 'MITRA')->count();
         $jml_info = Info::withoutTrashed()->count();
         return view('pages.admin.dashboard', [
             'jml_berita' => $berita,
             'jml_eventLoker' => $jml_eventLoker,
-            'jml_merchant' => $jml_merchant,
+            'jml_mitra' => $jml_mitra,
             'jml_info' => $jml_info
         ]);
     }

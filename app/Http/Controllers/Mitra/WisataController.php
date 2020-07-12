@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Merchant;
+namespace App\Http\Controllers\Mitra;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\WisataRequest;
@@ -24,7 +24,7 @@ class WisataController extends Controller
             ['id_kat_info', '=', '3'],
             ['deleted_at', '=', null],
         ])->get();
-        return \view('pages.merchant.info.wisata', [
+        return \view('pages.mitra.info.wisata', [
             'items' => $items
         ]);
     }
@@ -36,7 +36,7 @@ class WisataController extends Controller
      */
     public function create()
     {
-        return \view('pages.merchant.info.crud-wisata.create');
+        return \view('pages.mitra.info.crud-wisata.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class WisataController extends Controller
             'public'
         );
         Wisata::create($data);
-        return redirect('merchant/wisata')->with('success', 'Wisata Berhasil Ditambahkan!');
+        return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Ditambahkan!');
     }
 
     /**
@@ -81,7 +81,7 @@ class WisataController extends Controller
     public function edit($id)
     {
         $item = Wisata::findOrFail($id);
-        return \view('pages.merchant.info.crud-wisata.edit', [
+        return \view('pages.mitra.info.crud-wisata.edit', [
             'item' => $item
         ]);
     }
@@ -106,7 +106,7 @@ class WisataController extends Controller
             $data['gambar'] = $item->gambar;
         }
         $item->update($data);
-        return redirect('merchant/wisata')->with('success', 'Wisata Berhasil Diubah!');
+        return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Diubah!');
     }
 
     /**
@@ -120,6 +120,6 @@ class WisataController extends Controller
         $item = Wisata::findOrFail($id);
         $item->delete();
 
-        return redirect('merchant/wisata')->with('success', 'Wisata Berhasil Dihapus!');
+        return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Dihapus!');
     }
 }
