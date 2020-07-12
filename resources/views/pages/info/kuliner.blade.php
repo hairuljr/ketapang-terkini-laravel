@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="hero-wrap hero-bread" style="background-image: url('{{url('frontend/images/bg_1.png')}}')">
+<div class="hero-wrap hero-bread" style="background-image: url('{{url('frontend/images/bg_3.jpg')}}')">
 </div>
 
 <section class="ftco-section">

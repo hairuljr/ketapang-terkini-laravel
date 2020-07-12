@@ -15,4 +15,5 @@
 <script src="{{ url('frontend')}}/js/google-map.js"></script>
 <script src="{{ url('frontend')}}/js/viewer.js"></script>
 <script src="{{ url('frontend')}}/js/myscript.js"></script>
+<script src="{{ asset('js/share.js') }}"></script>
 <script src="{{ url('frontend')}}/js/main.js"></script>
