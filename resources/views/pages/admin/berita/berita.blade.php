@@ -39,7 +39,7 @@
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>{!! Str::limit($item->konten,80) !!}</td>
               <td>
-                <a href="{{ route('kelola-berita.edit', $item->id) }}" class="btn btn-info mb-2">
+                <a href="{{ route('kelola-berita.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>
                 <form action="{{ route('kelola-berita.destroy', $item->id) }}" method="POST" class="d-inline">
                 @csrf

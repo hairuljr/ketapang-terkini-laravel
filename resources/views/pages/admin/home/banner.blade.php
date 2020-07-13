@@ -33,7 +33,7 @@
               <td>{{ $item->sub_judul }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
-                <a href="{{ route('banner.edit', $item->id) }}" class="btn btn-info">
+                <a href="{{ route('banner.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>
                 <form action="{{ route('banner.destroy', $item->id) }}" method="POST" class="d-inline">
                 @csrf

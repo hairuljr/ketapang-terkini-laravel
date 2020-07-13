@@ -25,6 +25,7 @@ class EventLokerRequest extends FormRequest
     {
         return [
             'judul' => 'required|max:255',
+            'jenis' => 'required|max:10',
             //'gambar' => 'required|image'
         ];
     }

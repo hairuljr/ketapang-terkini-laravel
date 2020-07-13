@@ -10,7 +10,7 @@ class EventLoker extends Model
     use SoftDeletes;
     protected $table = 'eventlokers';
     protected $fillable = [
-        'judul', 'gambar'
+        'judul', 'jenis', 'gambar'
     ];
 
     protected $hidden = [];

@@ -37,7 +37,7 @@
               <td>{{ $item->keterangan }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
-                <a href="{{ route('info-fashion.edit', $item->id) }}" class="btn btn-info">
+                <a href="{{ route('info-fashion.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>
                 <form action="{{ route('info-fashion.destroy', $item->id) }}" method="POST" class="d-inline">
                 @csrf

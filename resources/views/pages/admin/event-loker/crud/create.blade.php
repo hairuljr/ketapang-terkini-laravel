@@ -27,6 +27,14 @@
         <label for="judul">Judul</label>
         <input type="text" class="form-control" name="judul" placeholder="Judul Event / Loker" value="{{ old('judul') }}">
       </div>
+      <div class="form-group">
+        <label for="jenis">Jenis</label>
+        <select name="jenis" id="jenis" class="form-control">
+          <option disabled selected>~ Pilih Jenis ~</option>
+          <option value="EVENT">Event</option>
+          <option value="LOKER">Loker</option>
+        </select>
+      </div>
 
       <div class="form-group row">
         <div class="col-sm-4">Gambar Event / Loker</div>

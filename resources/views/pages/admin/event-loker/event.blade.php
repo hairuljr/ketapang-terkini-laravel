@@ -18,8 +18,9 @@
           <thead class="thead-light">
             <tr>
               <th>No</th>
-              <th>Judul Event / Loker</th>
-              <th>Gambar Event / Loker</th>
+              <th>Judul</th>
+              <th>Jenis</th>
+              <th>Gambar</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -29,9 +30,10 @@
             <tr>
               <td>{{ $i++ }}</td>
               <td>{{ $item->judul }}</td>
+              <td>{{ $item->jenis }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
-                <a href="{{ route('event-loker.edit', $item->id) }}" class="btn btn-info">
+                <a href="{{ route('event-loker.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>
                 <form action="{{ route('event-loker.destroy', $item->id) }}" method="POST" class="d-inline">
                   @csrf

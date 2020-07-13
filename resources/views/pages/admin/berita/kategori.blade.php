@@ -29,7 +29,7 @@
               <td>{{ $i++ }}</td>
               <td>{{ $item->nama_kategori }}</td>
               <td>
-                <a href="{{ route('kategori-berita.edit', $item->id) }}" class="btn btn-info">
+                <a href="{{ route('kategori-berita.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>
                 <form action="{{ route('kategori-berita.destroy', $item->id) }}" method="POST" class="d-inline">
                 @csrf
