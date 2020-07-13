@@ -27,6 +27,15 @@ Route::get('/berita/cari', 'BeritaController@cari')->name('cari-berita');
 Route::get('/beritanya/{slug}', 'BeritaController@beritanya')->name('berita-detail');
 Route::get('/berita/kategori/{slug}', 'BeritaController@kategori')->name('kategori');
 Route::get('/berita/tagar/{slug}', 'BeritaController@tagar')->name('tagar');
+Route::get('/surat-tanggapan', 'SuratTanggapanController@index')->name('surat-tanggapan');
+Route::get('/surat-tanggapan-detail/{slug}', 'SuratTanggapanController@surat_tanggapan_detail')->name('surat-tanggapan-detail');
+Route::get('/tanggapan-detail/{slug}', 'SuratTanggapanController@tanggapan_detail')->name('tanggapan-detail');
+Route::post('kirim-surat', [
+    'uses' => 'KirimSuratController@kirim'
+]);
+Route::post('kirim-tanggapan', [
+    'uses' => 'KirimTanggapanController@kirim'
+]);
 
 Route::prefix('admin')
     ->namespace('Admin')

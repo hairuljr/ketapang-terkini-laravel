@@ -9,11 +9,6 @@ use App\EventLoker;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
-
     public function index(Request $request)
     {
         $fashion = InfoKite::where('nama_kat_info', 'Fashion')->get();

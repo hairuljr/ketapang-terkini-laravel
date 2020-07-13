@@ -34,6 +34,9 @@
         <li class="nav-item {{ (request()->segment(1) == 'berita') ? 'active' : '' }}">
           <a href="{{ url('/berita') }}" class="nav-link mt-3 mb-3 my-2 py-2">Berita</a>
         </li>
+        <li class="nav-item {{ (request()->segment(1) == 'surat-tanggapan') ? 'active' : '' }}">
+          <a href="{{ url('/surat-tanggapan') }}" class="nav-link mt-3 mb-3 my-2 py-2">Surat & Tanggapan</a>
+        </li>
         <li class="nav-item">
           @guest
           <form>
