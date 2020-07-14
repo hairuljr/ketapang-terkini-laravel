@@ -12,7 +12,7 @@ class Jasa extends Model
     protected $table = 'infos';
 
     protected $fillable = [
-        'judul', 'slug', 'id_users', 'id_kat_info', 'links', 'rating', 'jml_rating', 'keterangan', 'gambar'
+        'judul', 'slug', 'id_users', 'id_kat_info', 'links', 'rating', 'jml_rating', 'keterangan', 'cover'
     ];
 
     protected $hidden = [];

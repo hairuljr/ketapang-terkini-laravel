@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Mitra;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JasaRequest;
 use App\Jasa;
+use App\ImageInfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class JasaController extends Controller
@@ -49,16 +49,30 @@ class JasaController extends Controller
     public function store(JasaRequest $request)
     {
         $data = $request->validate([
-            'gambar' => 'required|image'
+            'cover' => 'required|image'
         ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-jasa',
+        $data['cover'] = $request->file('cover')->store(
+            'assets/info-jasa/cover',
             'public'
         );
-        Jasa::create($data);
+        $idnya = Jasa::create($data);
+        //masukan ke image_infos jasa
+        $images = array();
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = 'assets/info-jasa/' . $file->getClientOriginalName();
+                $file->move('../storage/app/public/assets/info-jasa', $name);
+                $images[] = $name;
+            }
+        }
+        /*Insert your data*/
+        ImageInfo::insert([
+            'nama_foto' =>  implode("|", $images),
+            'info_id' => $idnya->id
+        ]);
         return redirect('mitra/jasa')->with('success', 'Jasa Berhasil Ditambahkan!');
     }
 
@@ -81,9 +95,12 @@ class JasaController extends Controller
      */
     public function edit($id)
     {
+        $query = "SELECT `image_infos`.`nama_foto`, `infos`.* FROM `infos` JOIN `image_infos` on `image_infos`.`info_id` = `infos`.`id` WHERE `infos`.`id` = '$id'";
+        $foto_image = DB::select(DB::raw($query));
         $item = Jasa::findOrFail($id);
         return \view('pages.mitra.info.crud-jasa.edit', [
-            'item' => $item
+            'item' => $item,
+            'foto_image' => $foto_image
         ]);
     }
 
@@ -100,13 +117,29 @@ class JasaController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Jasa::findOrFail($id);
-        if ($request->hasFile('gambar')) {
-            $filename = $request->gambar->getClientOriginalName();
-            $data['gambar'] = $request->gambar->storeAs('assets/info-jasa', $filename, 'public');
+        if ($request->hasFile('cover')) {
+            $filename = $request->cover->getClientOriginalName();
+            $data['cover'] = $request->cover->storeAs('assets/info-jasa/cover', $filename, 'public');
         } else {
-            $data['gambar'] = $item->gambar;
+            $data['cover'] = $item->cover;
         }
         $item->update($data);
+        // masukkan ke image_infos
+        $images = array();
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = 'assets/info-jasa/' . $file->getClientOriginalName();
+                $file->move('../storage/app/public/assets/info-jasa', $name);
+                $images[] = $name;
+            }
+        }
+        //hapus dulu images_info sebelumnya
+        DB::table('image_infos')->where('info_id', '=', $id)->delete();
+        /*Insert your data*/
+        ImageInfo::insert([
+            'nama_foto' =>  implode("|", $images),
+            'info_id' => $id
+        ]);
         return redirect('mitra/jasa')->with('success', 'Jasa Berhasil Diubah!');
     }
 
@@ -120,7 +153,7 @@ class JasaController extends Controller
     {
         $item = Jasa::findOrFail($id);
         $item->delete();
-
+        DB::table('image_infos')->where('info_id', '=', $id)->delete();
         return redirect('mitra/jasa')->with('success', 'Jasa Berhasil Dihapus!');
     }
 }

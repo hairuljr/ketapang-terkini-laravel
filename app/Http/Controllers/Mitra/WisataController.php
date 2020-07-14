@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mitra;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\WisataRequest;
 use App\Wisata;
+use App\ImageInfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Str;
@@ -48,16 +49,30 @@ class WisataController extends Controller
     public function store(WisataRequest $request)
     {
         $data = $request->validate([
-            'gambar' => 'required|image'
+            'cover' => 'required|image'
         ]);
         $data = $request->all();
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
-        $data['gambar'] = $request->file('gambar')->store(
-            'assets/info-wisata',
+        $data['cover'] = $request->file('cover')->store(
+            'assets/info-wisata/cover',
             'public'
         );
-        Wisata::create($data);
+        $idnya = Wisata::create($data);
+        // masukkan ke image_infos
+        $images = array();
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = 'assets/info-wisata/' . $file->getClientOriginalName();
+                $file->move('../storage/app/public/assets/info-wisata', $name);
+                $images[] = $name;
+            }
+        }
+        /*Insert your data*/
+        ImageInfo::insert([
+            'nama_foto' =>  implode("|", $images),
+            'info_id' => $idnya->id
+        ]);
         return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Ditambahkan!');
     }
 
@@ -80,9 +95,12 @@ class WisataController extends Controller
      */
     public function edit($id)
     {
+        $query = "SELECT `image_infos`.`nama_foto`, `infos`.* FROM `infos` JOIN `image_infos` on `image_infos`.`info_id` = `infos`.`id` WHERE `infos`.`id` = '$id'";
+        $foto_image = DB::select(DB::raw($query));
         $item = Wisata::findOrFail($id);
         return \view('pages.mitra.info.crud-wisata.edit', [
-            'item' => $item
+            'item' => $item,
+            'foto_image' => $foto_image
         ]);
     }
 
@@ -99,13 +117,29 @@ class WisataController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Wisata::findOrFail($id);
-        if ($request->hasFile('gambar')) {
-            $filename = $request->gambar->getClientOriginalName();
-            $data['gambar'] = $request->gambar->storeAs('assets/info-wisata', $filename, 'public');
+        if ($request->hasFile('cover')) {
+            $filename = $request->cover->getClientOriginalName();
+            $data['cover'] = $request->cover->storeAs('assets/info-wisata/cover', $filename, 'public');
         } else {
-            $data['gambar'] = $item->gambar;
+            $data['cover'] = $item->cover;
         }
         $item->update($data);
+        // masukkan ke image_infos
+        $images = array();
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = 'assets/info-wisata/' . $file->getClientOriginalName();
+                $file->move('../storage/app/public/assets/info-wisata', $name);
+                $images[] = $name;
+            }
+        }
+        //hapus dulu images_info sebelumnya
+        DB::table('image_infos')->where('info_id', '=', $id)->delete();
+        /*Insert your data*/
+        ImageInfo::insert([
+            'nama_foto' =>  implode("|", $images),
+            'info_id' => $id
+        ]);
         return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Diubah!');
     }
 
@@ -119,7 +153,7 @@ class WisataController extends Controller
     {
         $item = Wisata::findOrFail($id);
         $item->delete();
-
+        DB::table('image_infos')->where('info_id', '=', $id)->delete();
         return redirect('mitra/wisata')->with('success', 'Wisata Berhasil Dihapus!');
     }
 }

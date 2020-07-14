@@ -21,7 +21,7 @@
               <th>Rating</th>
               <th>Jumlah Rating</th>
               <th>Keterangan</th>
-              <th>Gambar</th>
+              <th>Cover</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -34,7 +34,7 @@
               <td>{{ $item->rating }}</td>
               <td>{{ $item->jml_rating }}</td>
               <td>{{ $item->keterangan }}</td>
-              <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
+              <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->cover) }}"></td>
               <td>
                 <a href="{{ route('info-jasa.edit', $item->id) }}" class="btn btn-info my-1">
                 <i class="fa fa-pencil-alt"></i></a>

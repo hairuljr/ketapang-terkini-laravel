@@ -22,6 +22,8 @@ Route::get('/info/wisata', 'InfoController@wisata')->name('wisata');
 Route::get('/info/jasa', 'InfoController@jasa')->name('jasa');
 Route::get('/infonya/{slug}', 'InfoController@infonya')->name('info-detail');
 Route::get('/event-loker', 'EventLokerController@index')->name('event-loker');
+Route::get('/detail-event/{slug}', 'EventLokerController@detail_event')->name('detail-event');
+Route::get('/detail-loker/{slug}', 'EventLokerController@detail_loker')->name('detail-loker');
 Route::get('/berita', 'BeritaController@index')->name('berita');
 Route::get('/berita/cari', 'BeritaController@cari')->name('cari-berita');
 Route::get('/beritanya/{slug}', 'BeritaController@beritanya')->name('berita-detail');

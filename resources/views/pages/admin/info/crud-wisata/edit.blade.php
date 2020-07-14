@@ -48,32 +48,97 @@
       <input type="hidden" class="form-control" name="id_kat_info" value="3">
 
       <div class="form-group row">
-        <div class="col-sm-3">Gambar Info</div>
+        <div class="col-sm-3">Cover</div>
         <div class="col-sm-9">
             <div class="row">
               <div class="col-sm-4 mb-4">
-                <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail">
+                <img src="{{ Storage::url($item->cover) }}" class="img-thumbnail">
               </div>
                 <div class="col-sm-8">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="gambar" name="gambar" required>
-                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
+                        <input type="file" class="custom-file-input" id="cover" name="cover" required>
+                        <label class="custom-file-label" for="cover">Pilih cover</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row align-items-center justify-content-center mt-4">
-      <div class="col-sm-3">
-        <a href="{{ url('admin/info-wisata') }}" class="btn btn-secondary">Kembali</a>
+    <div class="form-group row">
+      <div class="col-sm-3">Gambar Info</div>
+      <div class="col-sm-9">
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="gambar" name="gambar[]" multiple="true">
+                      <label class="custom-file-label" for="gambar">Pilih Banyak Gambar</label>
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="col-sm-3">
-        <button type="submit" class="btn btn-primary">Tambah</button>
-      </div>
-    </div>
-      </form>
     </div>
   </div>
+  <div class="card-body col-md-3">
+    <table class="table table-responsive table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>No</th>
+          <th>Gambar Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($foto_image as $item)
+          @php
+            $imagesImploded = $item->nama_foto;
+            $imagesExploded = explode('|', $imagesImploded);
+          @endphp
+          @php
+             $i = 1;
+          @endphp 
+          @foreach(array_slice($imagesExploded, 0,4) as $image)
+          <tr>
+            <td>{{ $i++ }}</td>
+            <td><img src="{{ Storage::url(trim($image)) }}" class="img-thumbnail" width="150px;"></td>
+          </tr>
+          @endforeach
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  <div class="card-body col-md-3">
+    <table class="table table-responsive table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>No</th>
+          <th>Gambar Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($foto_image as $item)
+          @php
+            $imagesImploded = $item->nama_foto;
+            $imagesExploded = explode('|', $imagesImploded);
+          @endphp
+          @php
+             $i = 5;
+          @endphp 
+          @foreach(array_slice($imagesExploded, 4,10) as $image)
+          <tr>
+            <td>{{ $i++ }}</td>
+            <td><img src="{{ Storage::url(trim($image)) }}" class="img-thumbnail" width="150px;"></td>
+          </tr>
+          @endforeach
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row align-items-center justify-content-center">
+  <div class="col-sm-3 mb-2">
+    <a href="{{ url('admin/info-wisata') }}" class="btn btn-secondary mx-4">Kembali</a>
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </div>
+</div>
+</form>
 
 </div>
 <!-- /.container-fluid -->

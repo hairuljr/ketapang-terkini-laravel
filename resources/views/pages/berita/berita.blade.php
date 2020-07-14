@@ -21,31 +21,6 @@
     <div class="row">
       <div class="col-lg-8 ftco-animate">
         <div class="row">
-          @php
-              function tgl_indo($tanggal){
-              $bulan = array (
-                1 =>   'Januari',
-                'Februari',
-                'Maret',
-                'April',
-                'Mei',
-                'Juni',
-                'Juli',
-                'Agustus',
-                'September',
-                'Oktober',
-                'November',
-                'Desember'
-              );
-              $pecahkan = explode('-', $tanggal);
-              
-              // variabel pecahkan 0 = tanggal
-              // variabel pecahkan 1 = bulan
-              // variabel pecahkan 2 = tahun
-            
-              return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
-            }
-          @endphp
           @foreach ($news as $item)
             <div class="col-md-12 d-flex ftco-animate">
               <div class="blog-entry align-self-stretch d-md-flex">
@@ -53,7 +28,7 @@
                 </a>
                 <div class="text d-block pl-md-4">
                   <div class="meta mb-3">
-                    <div><a>{{ tgl_indo($item->tanggal) }}</a></div>
+                    <div><a>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('l, d F Y')}}</a></div>
                     <div><a>{{ $item->penulis }}</a></div>
                   </div>
                   <h3 class="heading">
@@ -116,7 +91,7 @@
                 </h3>
                 <div class="meta">
                   <div>
-                    <a><span class="icon-calendar"></span> {{ tgl_indo($item->tanggal) }}</a>
+                    <a><span class="icon-calendar"></span> {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('l, d F Y')}}</a>
                   </div>
                   <div>
                     <a><span class="icon-person"></span> {{ $item->penulis }}</a>

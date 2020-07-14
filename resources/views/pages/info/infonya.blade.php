@@ -15,26 +15,35 @@
       <div class="col-lg-6 mb-5">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          @foreach ($foto_image as $item)
+          @for ($i = 0; $i < count($arrayofallowed = explode('|', trim($item->nama_foto, '|'))); $i++)
+              <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" class="{{ ($i == 0) ? 'active':'' }}"></li>
+          @endfor
+          @endforeach
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <a href="{{ Storage::url($items->gambar) }}" class="image-popup">
-            <img style="font-size: 300px; width: 500px" class="d-block w-100" src="{{ Storage::url($items->gambar) }}" alt="First slide">
-            </a>
-          </div>
-          <div class="carousel-item">
-            <a href="{{ Storage::url($items->gambar) }}" class="image-popup">
-              <img style="height: 400px; width: 500px" class="d-block w-100" src="{{ Storage::url($items->gambar) }}" alt="Second slide">
+          @foreach ($foto_image as $item)
+            @php
+              $imagesImploded = $item->nama_foto;
+              $imagesExploded = explode('|', $imagesImploded);
+            @endphp
+            @php
+               $i = 1;
+            @endphp 
+            @foreach($imagesExploded as $image)
+            @php
+                $item_class = ($i ==1) ? 'active':'';
+            @endphp  
+            <div class="carousel-item {{ $item_class }}">
+              <a href="{{ Storage::url(trim($image)) }}" class="image-popup">
+                <img style="height: 400px;" src="{{ Storage::url(trim($image)) }}" class="d-block w-100">
               </a>
-          </div>
-          <div class="carousel-item">
-            <a href="{{ Storage::url($items->gambar) }}" class="image-popup">
-              <img style="height: 400px; width: 500px" class="d-block w-100" src="{{ Storage::url($items->gambar) }}" alt="Third slide">
-              </a>
-          </div>
+            </div>
+            @php
+                $i++
+            @endphp
+            @endforeach
+          @endforeach
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

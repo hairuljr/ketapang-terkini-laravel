@@ -20,6 +20,7 @@
               <th>No</th>
               <th>Judul</th>
               <th>Jenis</th>
+              <th>Deskripsi</th>
               <th>Gambar</th>
               <th>Aksi</th>
             </tr>
@@ -31,6 +32,7 @@
               <td>{{ $i++ }}</td>
               <td>{{ $item->judul }}</td>
               <td>{{ $item->jenis }}</td>
+              <td>{{ $item->deskripsi }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
                 <a href="{{ route('event-loker.edit', $item->id) }}" class="btn btn-info my-1">
@@ -46,7 +48,7 @@
             </tr>
             @empty
             <tr>
-              <td colspan="4" class="text-center">Data Kosong</td>
+              <td colspan="6" class="text-center">Data Kosong</td>
             </tr>
             @endforelse
           </tbody>

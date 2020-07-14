@@ -48,7 +48,10 @@ class InfoController extends Controller
 
     public function infonya(Request $request, $slug)
     {
+        $query = "SELECT `image_infos`.`nama_foto`, `infos`.* FROM `infos` JOIN `image_infos` on `image_infos`.`info_id` = `infos`.`id` WHERE `infos`.`slug` = '$slug'";
+        $foto_image = DB::select(DB::raw($query));
+        $gambarnya = DB::table('gambar')->get();
         $items = Info::where('slug', $slug)->firstOrFail();
-        return view('pages.info.infonya', \compact('items'));
+        return view('pages.info.infonya', \compact('items', 'foto_image', 'gambarnya'));
     }
 }

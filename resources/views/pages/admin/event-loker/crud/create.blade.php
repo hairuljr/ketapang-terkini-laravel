@@ -35,6 +35,15 @@
           <option value="LOKER">Loker</option>
         </select>
       </div>
+      <div class="form-group">
+        <label for="maps">Link Embed Google Maps</label>
+        <p><i><b>*</b>Link didapat dengan fitur sematkan Peta dari Google Maps.</i></p>
+        <input type="text" class="form-control" name="maps" placeholder="Sematkan peta dalam ukuran Kecil" value="{{ old('maps') }}">
+      </div>
+      <div class="form-group">
+        <label for="deskripsi">Deskripsi</label>
+        <textarea class="form-control" name="deskripsi" id="deskripsi" cols=70 rows="5">Isi Deskripsi...</textarea>
+      </div>
 
       <div class="form-group row">
         <div class="col-sm-4">Gambar Event / Loker</div>

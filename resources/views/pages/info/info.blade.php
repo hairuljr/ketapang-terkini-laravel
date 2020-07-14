@@ -26,7 +26,7 @@
       <div class="col-md-6 col-lg-3 ftco-animate">
         <div class="product">
           <a href="{{ route('info-detail', $item->slug) }}" class="img-prod" style="height: 250px;">
-            <img width="300px" height="250px" class="img-fluid" src="{{ Storage::url($item->gambar) }}">
+            <img width="300px" height="250px" class="img-fluid" src="{{ Storage::url($item->cover) }}">
           </a>
           <div class="text py-3 pb-4 px-3 text-center">
             <h3><a href="{{ route('info-detail', $item->slug) }}">{{ $item->judul }}</a></h3>

@@ -18,11 +18,11 @@
         </h3>
       </div>
     </div>
-    <div class="row ftco-animate" id="galley">
+    <div class="row ftco-animate">
       @forelse ($event as $item)
       <div class="col-md-6 col-lg-3 ftco-animate">
         <div class="product">
-          <a href="#galley" class="img-prod" style="height: 250px;">
+          <a href="{{ route('detail-event', $item->slug) }}" class="img-prod" style="height: 250px;">
             <img width="300px" class="img-fluid" src="{{ Storage::url($item->gambar) }}">
             <div class="text py-3 pb-4 px-3 text-center">
               <h3>{{ $item->judul }}</h3>
@@ -54,11 +54,11 @@
         </h3>
       </div>
     </div>
-    <div class="row ftco-animate" id="galley">
+    <div class="row ftco-animate">
       @forelse ($loker as $item)
       <div class="col-md-6 col-lg-3 ftco-animate">
         <div class="product">
-          <a href="#galley" class="img-prod" style="height: 250px;">
+          <a href="{{ route('detail-loker', $item->slug) }}" class="img-prod" style="height: 250px;">
             <img width="300px" class="img-fluid" src="{{ Storage::url($item->gambar) }}">
             <div class="text py-3 pb-4 px-3 text-center">
               <h3>{{ $item->judul }}</h3>
