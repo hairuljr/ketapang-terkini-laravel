@@ -64,7 +64,7 @@ class KulinerController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-kuliner/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-kuliner', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-kuliner', $name);
                 $images[] = $name;
             }
         }
@@ -129,7 +129,7 @@ class KulinerController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-kuliner/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-kuliner', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-kuliner', $name);
                 $images[] = $name;
             }
         }

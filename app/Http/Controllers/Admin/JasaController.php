@@ -65,7 +65,7 @@ class JasaController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-jasa/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-jasa', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-jasa', $name);
                 $images[] = $name;
             }
         }
@@ -130,7 +130,7 @@ class JasaController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-jasa/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-jasa', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-jasa', $name);
                 $images[] = $name;
             }
         }

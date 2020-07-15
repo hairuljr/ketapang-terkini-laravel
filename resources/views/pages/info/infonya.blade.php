@@ -75,7 +75,7 @@
           </p>
         </div>
         <p>
-          {{ $items->keterangan }}
+          {!! $items->keterangan !!}
         </p>
           <p class="font-weight-bold mb-0">Bagikan info ini :</p>
           <div id="social-links">

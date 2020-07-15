@@ -20,9 +20,12 @@ class EventLokerController extends Controller
         ]);
     }
 
-    public function detail_event(Request $request)
+    public function detail_event(Request $request, $slug)
     {
-        $items = EventLoker::where('jenis', 'EVENT')->firstOrFail();
+        $items = DB::table('eventlokers')->where([
+            ['slug', '=', $slug],
+            ['jenis', '=', 'EVENT']
+        ])->first();
         $jenis = 'Event';
         return view('pages.event-loker-detail', [
             'items' => $items,
@@ -30,9 +33,12 @@ class EventLokerController extends Controller
         ]);
     }
 
-    public function detail_loker(Request $request)
+    public function detail_loker(Request $request, $slug)
     {
-        $items = EventLoker::where('jenis', 'LOKER')->firstOrFail();
+        $items = DB::table('eventlokers')->where([
+            ['slug', '=', $slug],
+            ['jenis', '=', 'LOKER']
+        ])->first();
         $jenis = 'Loker';
         return view('pages.event-loker-detail', [
             'items' => $items,

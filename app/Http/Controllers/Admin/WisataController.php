@@ -65,7 +65,7 @@ class WisataController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-wisata/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-wisata', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-wisata', $name);
                 $images[] = $name;
             }
         }
@@ -130,7 +130,7 @@ class WisataController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-wisata/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-wisata', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-wisata', $name);
                 $images[] = $name;
             }
         }

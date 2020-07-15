@@ -64,7 +64,7 @@ class FashionController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-fashion/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-fashion', $name);
+                $file->move(base_path().'/storage/app/public/assets/info-fashion', $name);
                 $images[] = $name;
             }
         }
@@ -130,7 +130,7 @@ class FashionController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-fashion/' . $file->getClientOriginalName();
-                $file->move('../storage/app/public/assets/info-fashion', $name);
+                $file->move(base_path().'/storage/app/public/assets/info-fashion', $name);
                 $images[] = $name;
             }
         }
