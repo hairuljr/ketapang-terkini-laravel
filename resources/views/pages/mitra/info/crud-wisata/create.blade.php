@@ -42,7 +42,7 @@
       </div>
       <div class="form-group">
         <label for="keterangan">Keterangan</label>
-        <textarea class="form-control" name="keterangan" id="keterangan" cols=70 rows="5">Isi Keterangan...</textarea>
+        <textarea id="konten" class="form-control" name="keterangan" rows="10" cols="50"></textarea>
       </div>
       <input type="hidden" class="form-control" name="id_kat_info" value="3">
 
@@ -85,5 +85,10 @@
   </div>
 
 </div>
+<script src="{{ url('backend/js/ckeditor/ckeditor.js') }}"></script>
+
+<script>
+  CKEDITOR.replace( 'konten' );
+</script>
 <!-- /.container-fluid -->
 @endsection

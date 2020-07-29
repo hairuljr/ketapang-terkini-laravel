@@ -85,5 +85,10 @@
   </div>
 
 </div>
+<script src="{{ url('backend/js/ckeditor/ckeditor.js') }}"></script>
+
+<script>
+  CKEDITOR.replace( 'konten' );
+</script>
 <!-- /.container-fluid -->
 @endsection

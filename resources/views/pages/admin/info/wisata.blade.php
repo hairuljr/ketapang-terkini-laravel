@@ -33,7 +33,7 @@
               <td>{{ $item->judul }}</td>
               <td>{{ $item->rating }}</td>
               <td>{{ $item->jml_rating }}</td>
-              <td>{{ $item->keterangan }}</td>
+              <td>{!! $item->keterangan !!}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->cover) }}"></td>
               <td>
                 <a href="{{ route('info-wisata.edit', $item->id) }}" class="btn btn-info my-1">

@@ -118,11 +118,11 @@ class WisataController extends Controller
         $data['id_users'] = FacadesAuth::user()->id;
         $data['slug'] = Str::slug($request->judul);
         $item = Wisata::findOrFail($id);
-        if ($request->hasFile('gambar')) {
-            $filename = $request->gambar->getClientOriginalName();
-            $data['gambar'] = $request->gambar->storeAs('assets/info-wisata/cover', $filename, 'public');
+        if ($request->hasFile('cover')) {
+            $filename = $request->cover->getClientOriginalName();
+            $data['cover'] = $request->cover->storeAs('assets/info-wisata/cover', $filename, 'public');
         } else {
-            $data['gambar'] = $item->gambar;
+            $data['cover'] = $item->cover;
         }
         $item->update($data);
         // masukkan ke image_infos
