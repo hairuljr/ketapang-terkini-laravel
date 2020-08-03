@@ -21,13 +21,12 @@
               <th>Judul</th>
               <th>Penulis</th>
               <th>Tanggal Terbit</th>
-              <th>Kategori</th>
               <th>Gambar</th>
               <th>Konten</th>
               <th>Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="galley">
             <?php $i = 1; ?>
             @forelse ($items as $item)
               <tr>
@@ -35,7 +34,6 @@
               <td>{{ $item->judul }}</td>
               <td>{{ $item->penulis }}</td>
               <td>{{ $item->tanggal }}</td>
-              <td>{{ $item->nama_kategori }}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>{!! Str::limit($item->konten,80) !!}</td>
               <td>

@@ -11,7 +11,7 @@
   </a>
   </div>
 
-  <div class="row">
+  <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">
         <table id="dataTable" class="table table-bordered table-hover" width="100%" cellspacing="0">
@@ -25,14 +25,14 @@
               <th>Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="galley">
             <?php $i = 1; ?>
             @forelse ($items as $item)
             <tr>
               <td>{{ $i++ }}</td>
               <td>{{ $item->judul }}</td>
               <td>{{ $item->jenis }}</td>
-              <td>{{ $item->deskripsi }}</td>
+              <td>{!! $item->deskripsi !!}</td>
               <td><img class="img-thumbnail" width="200px" src="{{ Storage::url($item->gambar) }}"></td>
               <td>
                 <a href="{{ route('event-loker.edit', $item->id) }}" class="btn btn-info my-1">

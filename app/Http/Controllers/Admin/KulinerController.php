@@ -38,7 +38,9 @@ class KulinerController extends Controller
      */
     public function create()
     {
-        return \view('pages.admin.info.crud-kuliner.create');
+        return \view('pages.admin.info.crud.create', [
+            'item' => new Kuliner()
+        ]);
     }
 
     /**
@@ -99,7 +101,7 @@ class KulinerController extends Controller
         $query = "SELECT `image_infos`.`nama_foto`, `infos`.* FROM `infos` JOIN `image_infos` on `image_infos`.`info_id` = `infos`.`id` WHERE `infos`.`id` = '$id'";
         $foto_image = DB::select(DB::raw($query));
         $item = Kuliner::findOrFail($id);
-        return \view('pages.admin.info.crud-kuliner.edit', [
+        return \view('pages.admin.info.crud.edit', [
             'item' => $item,
             'foto_image' => $foto_image
         ]);
@@ -135,12 +137,14 @@ class KulinerController extends Controller
             }
         }
         //hapus dulu images_info sebelumnya
-        DB::table('image_infos')->where('info_id', '=', $id)->delete();
-        /*Insert your data*/
-        ImageInfo::insert([
-            'nama_foto' =>  implode("|", $images),
-            'info_id' => $id
-        ]);
+        if ($request->file('gambar')) {
+            DB::table('image_infos')->where('info_id', '=', $id)->delete();
+            /*Insert your data*/
+            ImageInfo::insert([
+                'nama_foto' =>  implode("|", $images),
+                'info_id' => $id
+            ]);
+        }
         return redirect('admin/info-kuliner')->with('toast_success', 'Kuliner Berhasil Diubah!');
     }
 

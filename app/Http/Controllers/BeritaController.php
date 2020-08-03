@@ -110,7 +110,7 @@ class BeritaController extends Controller
             'cari' => $cari,
             'pencarian' => $pencarian,
             'jml_category' => $jml_category,
-            'recentnews' => $recentnews
+            'newsPopuler' => $newsPopuler
         ]);
     }
 }

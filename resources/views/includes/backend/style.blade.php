@@ -4,6 +4,15 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ url('backend') }}/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="{{ url('backend') }}/css/style_file.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link href="{{ url('backend') }}/js/img-uploader/dist/image-uploader.min.css" rel="stylesheet">
+
+  <!-- Select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+  {{-- Viewer --}}
+  <link rel="stylesheet" href="{{ url('frontend')}}/css/viewer.css" />
 
   <!-- Custom styles for this page -->
   <link href="{{ url('backend') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

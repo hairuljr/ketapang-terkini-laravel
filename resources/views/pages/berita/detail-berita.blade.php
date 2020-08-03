@@ -81,4 +81,5 @@
   </div>
 </section>
 <!-- .section -->
+@include('pages.berita.discus')
 @endsection

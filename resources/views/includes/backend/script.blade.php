@@ -10,9 +10,6 @@
 
   <!-- Page level plugins -->
   <script src="{{ url('backend') }}/vendor/chart.js/Chart.min.js"></script>
-  
-  <!-- CKEditor -->
-  <script src="{{ url('backend') }}/js/ckeditor.js"></script>
 
   <!-- Page level plugins -->
   <script src="{{ url('backend') }}/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -20,3 +17,47 @@
 
   <!-- Page level custom scripts -->
   <script src="{{ url('backend') }}/js/demo/datatables-demo.js"></script>
+  <script src="{{ url('frontend')}}/js/viewer.js"></script>
+  <script src="{{ url('backend') }}/js/img-uploader/dist/image-uploader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script>
+    $('.input-images-cover').imageUploaderCover();
+    $('.input-images-all').imageUploaderAll();
+    $('.input-images').imageUploader();
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('.select2').select2();
+    });
+  </script>
+  <script>
+	  window.addEventListener("DOMContentLoaded", function() {
+	    var galley = document.getElementById("galley");
+	    var viewer = new Viewer(galley, {
+	      url: "data-original",
+	      toolbar: {
+	        oneToOne: true,
+
+	        prev: function() {
+	          viewer.prev(true);
+	        },
+
+	        play: true,
+
+	        next: function() {
+	          viewer.next(true);
+	        },
+
+	        download: function() {
+	          const a = document.createElement("a");
+
+	          a.href = viewer.image.src;
+	          a.download = viewer.image.alt;
+	          document.body.appendChild(a);
+	          a.click();
+	          document.body.removeChild(a);
+	        }
+	      }
+	    });
+	  });
+	</script>

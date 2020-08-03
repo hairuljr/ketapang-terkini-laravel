@@ -11,7 +11,7 @@
   </a>
   </div>
 
-  <div class="row">
+  <div class="card shadow mb-4">
     <div class="card-body">
       <div class="table-responsive">
         <table id="dataTable" class="table table-bordered table-hover" width="100%" cellspacing="0">
@@ -25,7 +25,7 @@
               <th>Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="galley">
             <?php $i = 1; ?>
             @forelse ($items as $item)
             <tr>

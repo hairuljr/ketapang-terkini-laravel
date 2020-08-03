@@ -94,6 +94,7 @@ class NewsController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         $item = News::findOrFail($id);
+        // \dd($item->tags);
         return \view('pages.admin.berita.crud-berita.edit', \compact('categories', 'tags', 'item'));
     }
 
@@ -124,11 +125,16 @@ class NewsController extends Controller
             'gambar' => $gambarnya,
             'konten' => $request->konten,
         ]);
-        DB::table('category_news')->where('news_id', $id)->delete();
-        DB::table('news_tag')->where('news_id', $id)->delete();
-        $news = new News();
-        $news->categories()->attach($request->category_id, ['news_id' => $id]);
-        $news->tags()->attach($request->tag_id, ['news_id' => $id]);
+        if ($request->category_id) {
+            $news = new News();
+            DB::table('category_news')->where('news_id', $id)->delete();
+            $news->categories()->attach($request->category_id, ['news_id' => $id]);
+        }
+        if ($request->tag_id) {
+            $news = new News();
+            DB::table('news_tag')->where('news_id', $id)->delete();
+            $news->tags()->attach($request->tag_id, ['news_id' => $id]);
+        }
 
         return redirect('admin/kelola-berita')->with('toast_success', 'Berita Berhasil Diubah!');
     }

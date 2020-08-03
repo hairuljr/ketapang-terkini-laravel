@@ -61,7 +61,7 @@
           @endif
           <form method="POST" action="{{ url('logout') }}">
             @csrf
-            <button class="buttonku btn btn-outline-success mt-3 mb-3 my-2 py-2" type="submit">Logout</button>
+            <button class="buttonku btn btn-outline-success  mt-3 mb-3 my-2 py-2" type="submit"><i class="fa fa-fw fa-power-off" aria-hidden="true"></i></button>
           </form>
           @endauth
         </li>

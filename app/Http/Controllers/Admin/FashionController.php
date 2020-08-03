@@ -37,7 +37,9 @@ class FashionController extends Controller
      */
     public function create()
     {
-        return \view('pages.admin.info.crud-fashion.create');
+        return \view('pages.admin.info.crud.create', [
+            'item' => new Fashion()
+        ]);
     }
 
     /**
@@ -64,7 +66,7 @@ class FashionController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-fashion/' . $file->getClientOriginalName();
-                $file->move(base_path().'/storage/app/public/assets/info-fashion', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-fashion', $name);
                 $images[] = $name;
             }
         }
@@ -99,7 +101,7 @@ class FashionController extends Controller
         $query = "SELECT `image_infos`.`nama_foto`, `infos`.* FROM `infos` JOIN `image_infos` on `image_infos`.`info_id` = `infos`.`id` WHERE `infos`.`id` = '$id'";
         $foto_image = DB::select(DB::raw($query));
         $item = Fashion::findOrFail($id);
-        return \view('pages.admin.info.crud-fashion.edit', [
+        return \view('pages.admin.info.crud.edit', [
             'item' => $item,
             'foto_image' => $foto_image
         ]);
@@ -130,17 +132,19 @@ class FashionController extends Controller
         if ($files = $request->file('gambar')) {
             foreach ($files as $file) {
                 $name = 'assets/info-fashion/' . $file->getClientOriginalName();
-                $file->move(base_path().'/storage/app/public/assets/info-fashion', $name);
+                $file->move(base_path() . '/storage/app/public/assets/info-fashion', $name);
                 $images[] = $name;
             }
         }
         //hapus dulu images_info sebelumnya
-        DB::table('image_infos')->where('info_id', '=', $id)->delete();
-        /*Insert your data*/
-        ImageInfo::insert([
-            'nama_foto' =>  implode("|", $images),
-            'info_id' => $id
-        ]);
+        if ($request->file('gambar')) {
+            DB::table('image_infos')->where('info_id', '=', $id)->delete();
+            /*Insert your data*/
+            ImageInfo::insert([
+                'nama_foto' =>  implode("|", $images),
+                'info_id' => $id
+            ]);
+        }
         return redirect('admin/info-fashion')->with('toast_success', 'Fashion Berhasil Diubah!');
     }
 

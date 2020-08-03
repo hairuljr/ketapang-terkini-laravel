@@ -26,7 +26,7 @@
         @csrf
       <div class="form-group">
         <label for="nama_tags">Nama Tagar</label>
-        <input type="text" class="form-control" name="nama_tags" placeholder="Nama Tagar Berita" value="{{ $item->nama_tags }}">
+        <input type="text" class="form-control" name="nama_tags" placeholder="Nama Tagar Berita" value="{{ old('nama_tags') ?? $item->nama_tags }}">
       </div>
 
     <div class="row align-items-center justify-content-center mt-4">

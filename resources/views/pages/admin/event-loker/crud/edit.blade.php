@@ -18,9 +18,8 @@
       </div>
   @endif
 
-
   <div class="row">
-    <div class="card-body col-md-6">
+    <div class="card-body col-md-8">
       <form action="{{ route('event-loker.update', $item->id) }}" method="post" enctype="multipart/form-data">
       @method('PUT')
         @csrf
@@ -39,41 +38,39 @@
       <div class="form-group">
         <label for="maps">Link Embed Google Maps</label>
         <p><i><b>*</b>Link didapat dengan fitur sematkan Peta dari Google Maps.</i></p>
+        <a class="btn btn-sm btn-outline-success mb-2 pull-right" href="http://shorturl.at/yFHO1" target="_blank" rel="noopener noreferrer">Ke Gmaps</a>
         <input type="text" class="form-control" name="maps" placeholder="Sematkan peta dalam ukuran Kecil" value="{{ $item->maps }}">
+        <div class="mt-2">
+          {!! $item->maps !!}
+        </div>
       </div>
       <div class="form-group">
-        <label for="deskripsi">Deskripsi</label>
-        <textarea class="form-control" name="deskripsi" id="deskripsi" cols=70 rows="5">{{ $item->deskripsi }}</textarea>
+        <textarea id="deskripsi" class="form-control" name="deskripsi" rows="10" cols="50">{{ old('deskripsi') ?? $item->deskripsi }}</textarea>
       </div>
-
-      <div class="form-group row">
-        <div class="col-sm-4">Gambar Event / Loker</div>
-        <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-4 mb-4">
-                <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail">
-            </div>
-                <div class="col-sm-8">
-                    <div class="custom-file">
-                        <input value="{{ $item->gambar }}" type="file" class="custom-file-input" id="gambar" name="gambar">
-                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
-                    </div>
-                </div>
-            </div>
+      <label class="active">Gambar Event / Loker</label>
+        <img id="galley" src="{{ Storage::url($item->gambar) }}" width="25%" class="img-thumbnail">
+      </a>
+      <div class="input-images-all mb-4">
+        <div class="input-field">
+          <div class="input-images-1" style="padding-top: .5rem;"></div>
         </div>
-    </div>
-    <div class="row align-items-center justify-content-center mt-4">
-      <div class="col-sm-3">
-        <a href="{{ url('admin/event-loker') }}" class="btn btn-secondary">Kembali</a>
       </div>
-      <div class="col-sm-3">
-        <button type="submit" class="btn btn-primary">Edit</button>
+      <div class="row align-items-center justify-content-center mt-4">
+        <div class="col-sm-3">
+          <a href="{{ url('admin/event-loker') }}" class="btn btn-secondary mb-2">Kembali</a>
+        </div>
+        <div class="col-sm-3">
+          <button type="submit" class="btn btn-primary">Edit</button>
+        </div>
       </div>
-    </div>
       </form>
     </div>
   </div>
 
 </div>
 <!-- /.container-fluid -->
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace( 'deskripsi' );
+</script>
 @endsection

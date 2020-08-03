@@ -25,12 +25,14 @@
         @csrf
         <div class="form-group">
           <label for="judul">Judul</label>
-          <input type="text" class="form-control" name="judul" value="{{ $item->judul }}">
+          <input type="text" class="form-control" name="judul" value="{{ old('judul') ?? $item->judul }}">
         </div>
         <div class="form-group">
           <label for="category_id">Kategori Berita</label>
-          <select multiple name="category_id[]" required class="form-control">
-              <option value="">Kategori Sebelumnya : {{ $item->nama_kategories }}</option>
+          <select multiple name="category_id[]" required class="form-control select2">
+              @foreach($item->categories as $cat)
+                <option selected disabled value="{{ $cat->id }}">{{ $cat->nama_kategori }}</option>
+              @endforeach
               @foreach($categories as $kb)
                   <option value="{{ $kb->id }}">
                       {{ $kb->nama_kategori }}
@@ -39,44 +41,53 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="tag_id">Tagar Berita</label>
-            @foreach($tags as $tg)
-              <div class="custom-control custom-switch">
-                <input multiple name="tag_id[]" type="checkbox" class="custom-control-input" value="{{ $tg->id }}" id="{{ $tg->id }}">
-                <label class="custom-control-label" for="{{ $tg->id }}">#{{ $tg->nama_tags }}</label>
-              </div>
-            @endforeach
+          <label for="tag_id">Tagarnya</label>
+          @foreach($item->tags as $tag)
+            <div class="custom-control custom-switch">
+              <input disabled checked type="checkbox" class="custom-control-input">
+              <label class="custom-control-label">#{{ $tag->nama_tags }}</label>
+            </div>
+          @endforeach
+          <hr>
+          <label for="tag_id">Pilih Tagar (jika ingin ubah)</label>
+          @foreach($tags as $tg)
+            <div class="custom-control custom-switch">
+              <input multiple name="tag_id[]" type="checkbox" class="custom-control-input" value="{{ $tg->id }}" id="{{ $tg->id }}">
+              <label class="custom-control-label" for="{{ $tg->id }}">#{{ $tg->nama_tags }}</label>
+            </div>
+          @endforeach
         </div>
         <div class="form-group">
           <label for="penulis">Penulis</label>
-          <input type="text" class="form-control" name="penulis" placeholder="Penulis Berita" value="{{ $item->penulis }}">
+          <input type="text" class="form-control" name="penulis" placeholder="Penulis Berita" value="{{ old('penulis') ?? $item->penulis }}">
         </div>
         <div class="form-group">
           <label for="penggalan">Penggalan</label>
-          <input type="text" class="form-control" name="penggalan" placeholder="Penggalan Berita" value="{{ $item->penggalan }}">
+          <input type="text" class="form-control" name="penggalan" placeholder="Penggalan Berita" value="{{ old('penggalan') ?? $item->penggalan }}">
         </div>
         <div class="form-group">
           <label for="tanggal">Tanggal</label>
-          <input type="date" class="form-control" name="tanggal" value="{{ $item->tanggal }}">
+          <input type="date" class="form-control" name="tanggal" value="{{ old('tanggal') ?? $item->tanggal }}">
         </div>
         <div class="form-group row">
-          <div class="col-sm-4">Gambar Berita</div>
-          <div class="col-sm-8">
+          <div class="col-sm-2">Gambar Berita</div>
+          <div class="col-sm-10">
               <div class="row">
-                <div class="col-sm-4 mb-4">
+                <div class="col-sm-4 mb-4" id="galley">
                   <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail">
-              </div>
+                </div>
                   <div class="col-sm-8">
-                      <div class="custom-file">
-                          <input value="{{ $item->gambar }}" type="file" class="custom-file-input" id="gambar" name="gambar">
-                          <label class="custom-file-label" for="gambar">Pilih gambar</label>
+                    <div class="input-images-all mb-4">
+                      <div class="input-field">
+                          <div class="input-images-1" style="padding-top: .5rem;"></div>
                       </div>
+                    </div>
                   </div>
               </div>
           </div>
       </div>
         <div class="form-group">
-          <textarea id="konten" class="form-control" name="konten" rows="10" cols="50">{!! $item->konten !!}</textarea>
+          <textarea id="konten" class="form-control" name="konten" rows="10" cols="50">{!! old('konten') ?? $item->konten !!}</textarea>
         </div>
 
     <div class="row align-items-center justify-content-center mt-4">
@@ -93,7 +104,7 @@
 
 </div>
 <!-- /.container-fluid -->
-<script src="{{ url('backend/js/ckeditor/ckeditor.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 <script>
   CKEDITOR.replace('konten');

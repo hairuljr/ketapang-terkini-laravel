@@ -28,25 +28,17 @@
         <label for="nama_kat_info">Nama Kategori Info</label>
         <input type="text" class="form-control" name="nama_kat_info" placeholder="Nama Kategori Info" value="{{ $item->nama_kat_info }}">
       </div>
-
-      <div class="form-group row">
-        <div class="col-sm-4">Gambar Info</div>
-        <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-4 mb-4">
-                <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail">
-            </div>
-                <div class="col-sm-8">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="gambar" name="gambar" required>
-                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
-                    </div>
-                </div>
-            </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <div class="input-images-all mb-4">
+          <div class="input-field">
+              <div class="input-images-1" style="padding-top: .5rem;"></div>
+          </div>
         </div>
+      </div>
     </div>
     <div class="row align-items-center justify-content-center mt-4">
-      <div class="col-sm-3">
+      <div class="col-sm-3 my-2">
         <a href="{{ url('admin/info-kite') }}" class="btn btn-secondary">Kembali</a>
       </div>
       <div class="col-sm-3">
@@ -54,6 +46,11 @@
       </div>
     </div>
       </form>
+    </div>
+    <div class="col-md-6">
+      <div class="col-sm-12 mb-4" id="galley">
+        <img src="{{ Storage::url($item->gambar) }}" class="img-thumbnail" style="max-height: 350px; object-fit: cover;">
+      </div>
     </div>
   </div>
 

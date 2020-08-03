@@ -57,17 +57,10 @@
         <label for="tanggal">Tanggal</label>
         <input type="date" class="form-control" name="tanggal" value="{{ date('Y-m-d') }}">
       </div>
-      <div class="form-group row">
-        <div class="col-sm-2">Gambar Berita</div>
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="gambar" name="gambar" required>
-                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
-                    </div>
-                </div>
-            </div>
+      <div class="input-images-all mb-4">
+        <div class="input-field">
+            <label class="active">Gambar Berita</label>
+            <div class="input-images-1" style="padding-top: .5rem;"></div>
         </div>
       </div>
       <div class="form-group">
@@ -88,7 +81,7 @@
 </div>
 <!-- /.container-fluid -->
 
-<script src="{{ url('backend/js/ckeditor/ckeditor.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 <script>
   CKEDITOR.replace( 'konten' );

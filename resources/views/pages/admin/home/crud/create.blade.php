@@ -32,19 +32,12 @@
         <input type="text" class="form-control" name="sub_judul" placeholder="Sub Judul Banner" value="{{ old('sub_judul') }}">
       </div>
 
-      <div class="form-group row">
-        <div class="col-sm-4">Gambar Banner</div>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="gambar" name="gambar">
-                        <label class="custom-file-label" for="gambar">Pilih gambar</label>
-                    </div>
-                </div>
-            </div>
+      <div class="input-images-all mb-4">
+        <div class="input-field">
+            <label class="active">Gambar Banner</label>
+            <div class="input-images-1" style="padding-top: .5rem;"></div>
         </div>
-    </div>
+      </div>
     <div class="row align-items-center justify-content-center mt-4">
       <div class="col-sm-3">
         <a href="{{ url('admin/banner') }}" class="btn btn-secondary">Kembali</a>
